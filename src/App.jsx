@@ -22,11 +22,15 @@ import MediaPage from './pages/MediaGallery';
 import TextileAssociates from './pages/TextileAssociates';
 import BuyerPlatform from './pages/BuyerPlatform';
 import SellerPlatform from './pages/SellerPlatform';
+import ScrollToTop from './components/ScrollToTop';
 function App() {
   return (
     <Router>
+     
       <div className="font-['Poppins'] antialiased bg-white min-h-screen flex flex-col">
-        <Navbar />
+          <ScrollToTop />
+          <Navbar />
+       
         <div className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />

@@ -2,7 +2,19 @@ import React, { useState } from 'react';
 import { Gavel, Clock, History, ChevronRight, Info, ShieldCheck, MapPin } from 'lucide-react';
 
 const EAuction = () => {
+  // Bidding logic
   const [bid, setBid] = useState(450);
+
+  // --- PRODUCT IMAGES LOGIC ---
+  // 1. Ek images array banate hain jisme sabhi product photos ke URLs honge.
+  const productImages = [
+    "https://plus.unsplash.com/premium_photo-1682148886043-7f879bfadc6b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGV4dGlsZSUyMEZpbmlzaGVkJTIwUHJvZHVjdHN8ZW58MHx8MHx8fDA%3D",
+    "https://images.unsplash.com/photo-1562869929-bda0650edb1f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHRleHRpbGV8ZW58MHx8MHx8fDA%3D",
+    "https://media.istockphoto.com/id/521812220/photo/colorful-upholstery-fabric-samples.webp?a=1&b=1&s=612x612&w=0&k=20&c=cO0Qeg8pdJCD4n-8-ZtStHkC06lngQ7MaPRkY86KNBE="
+  ];
+
+  // 2. Ek state banate hain jo track rakhega ki abhi kaunsi main image select hai.
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   return (
     <div className="bg-white min-h-screen font-['Poppins'] text-slate-900">
@@ -37,13 +49,36 @@ const EAuction = () => {
           
           {/* LEFT: VISUALS & SPECS (7 Columns) */}
           <div className="lg:col-span-7">
-            <div className="aspect-[16/10] rounded-[2rem] overflow-hidden bg-slate-100 mb-10">
-              <img 
-                src="https://plus.unsplash.com/premium_photo-1682148886043-7f879bfadc6b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGV4dGlsZSUyMEZpbmlzaGVkJTIwUHJvZHVjdHN8ZW58MHx8MHx8fDA%3D" 
-                className="w-full h-full object-cover" 
-                alt="Product" 
-              />
+            
+            {/* --- IMPROVED IMAGE GALLERY SECTION --- */}
+            <div className="space-y-6 mb-10">
+                {/* 1. Main Selected Image Area */}
+                <div className="aspect-[16/10] rounded-[2rem] overflow-hidden bg-slate-100 border border-slate-200 shadow-inner">
+                    <img 
+                        src={productImages[selectedImageIndex]} // State se URL le rahe hain
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" // Hover scale effect
+                        alt="Product Main View" 
+                    />
+                </div>
+
+                {/* 2. Image Thumbnails List */}
+                <div className="grid grid-cols-3 gap-6">
+                    {productImages.map((imgUrl, index) => (
+                        <div 
+                            key={index}
+                            className={`aspect-[16/10] rounded-2xl overflow-hidden bg-slate-50 cursor-pointer border-2 transition-all ${selectedImageIndex === index ? 'border-blue-500 ring-2 ring-blue-100' : 'border-slate-200'}`}
+                            onClick={() => setSelectedImageIndex(index)} // Click karne par index update hota hai
+                        >
+                            <img 
+                                src={imgUrl}
+                                className="w-full h-full object-cover" 
+                                alt={`Product View ${index + 1}`} 
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
+            {/* --- END OF IMAGE GALLERY SECTION --- */}
 
             <div className="grid grid-cols-2 gap-10">
               <div>
