@@ -13,10 +13,10 @@ const Home = () => {
       <ProcessFlow />
       {/* Forms Section */}
        <Stats />
-      <section id="register-section" className="py-20 bg-slate-50">
+      {/* <section id="register-section" className="py-20 bg-slate-50">
         <PlatformForms />
        
-      </section>
+      </section> */}
       <div className="max-w-7xl mx-auto px-6 py-10">
         <TradeOps />
       </div>
