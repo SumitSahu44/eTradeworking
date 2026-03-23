@@ -83,7 +83,7 @@ const Navbar = () => {
               <div className="absolute top-full pt-4 -left-6 w-60 animate-in fade-in slide-in-from-top-2">
                 <div className="bg-white rounded-2xl shadow-2xl p-3 border border-slate-100">
                   {menuGroups.company.map((item) => (
-                    <NavLink key={item.name} to={item.path} className="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-all font-bold text-[9px] uppercase tracking-wider">
+                    <NavLink key={item.name} to={item.path} className="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-all font-bold text-[11px] uppercase tracking-wider">
                       <item.icon size={15} className="text-blue-500" /> {item.name}
                     </NavLink>
                   ))}
@@ -101,7 +101,7 @@ const Navbar = () => {
               <div className="absolute top-full pt-4 -left-6 w-64 animate-in fade-in slide-in-from-top-2">
                 <div className="bg-white rounded-2xl shadow-2xl p-3 border border-slate-100">
                   {menuGroups.trade.map((item) => (
-                    <NavLink key={item.name} to={item.path} className="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-all font-bold text-[9px] uppercase tracking-wider">
+                    <NavLink key={item.name} to={item.path} className="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-all font-bold text-[11px] uppercase tracking-wider">
                       <item.icon size={15} className="text-blue-500" /> {item.name}
                     </NavLink>
                   ))}
@@ -119,7 +119,7 @@ const Navbar = () => {
               <div className="absolute top-full pt-4 -left-6 w-64 animate-in fade-in slide-in-from-top-2">
                 <div className="bg-white rounded-2xl shadow-2xl p-3 border border-slate-100">
                   {menuGroups.resources.map((item) => (
-                    <NavLink key={item.name} to={item.path} className="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-all font-bold text-[9px] uppercase tracking-wider">
+                    <NavLink key={item.name} to={item.path} className="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-all font-bold text-[11px] uppercase tracking-wider">
                       <item.icon size={15} className="text-blue-500" /> {item.name}
                     </NavLink>
                   ))}
@@ -148,7 +148,7 @@ const Navbar = () => {
           <NavLink to="/" onClick={() => setIsOpen(false)} className="font-black text-slate-900 text-xs tracking-widest border-b border-slate-100 pb-2">HOME</NavLink>
           {Object.entries(menuGroups).map(([key, items]) => (
             <div key={key} className="space-y-3">
-              <p className="text-[9px] font-black text-blue-600 tracking-[0.2em] uppercase underline underline-offset-4 decoration-blue-100">{key}</p>
+              <p className="text-[11px] font-black text-blue-600 tracking-[0.2em] uppercase underline underline-offset-4 decoration-blue-100">{key}</p>
               <div className="grid grid-cols-1 gap-3 pl-2">
                 {items.map(item => (
                   <NavLink key={item.name} to={item.path} onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-[10px] font-bold text-slate-700 uppercase">
