@@ -92,7 +92,7 @@ const Navbar = () => {
         {/* Logo */}
         <NavLink to="/" className="flex items-center shrink-0">
           <img
-            src="/Parekh  e-Trade Market (Textile).png"
+            src="/e-trade-logo.png"
             alt="Parekh e-Trade Logo"
             className={`
             transition-all duration-300 object-contain

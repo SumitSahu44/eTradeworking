@@ -5,12 +5,14 @@ const locations = [
   { id: 2, name: "Parekh Silk", city: "Surat", short: "Silk", x: 330, y: 550 },
   { id: 3, name: "Parekh Rayon", city: "Raipur", short: "Rayon", x: 488, y: 505 },
   { id: 4, name: "Parekh Linen", city: "Kolkata", short: "Linen", x: 625, y: 515 },
+  // ✅ Hyderabad will be highlighted
   { id: 5, name: "Parekh e-Trade Market", city: "Hyderabad", short: "e-Trade", x: 450, y: 635 },
   { id: 6, name: "Parekh Chamber of Textile", city: "Bangalore", short: "Chamber", x: 405, y: 755 },
   { id: 7, name: "Parekh Southern Polyfabrics", city: "Chennai", short: "Southern", x: 475, y: 755 },
 ];
 
-const PIN_COLOR = "#620000";
+const PIN_COLOR = "#155dfc"; // Default blue
+const HIGHLIGHT_COLOR = "#155dfc"; // Unique Orange for Hyderabad
 
 function Pin({ loc, index, active, onClick }) {
   const [visible, setVisible] = useState(false);
@@ -34,34 +36,45 @@ function Pin({ loc, index, active, onClick }) {
     textAnchor = "start";
   }
 
+  // ✅ Step 1: Decide colors based on whether it's Hyderabad
+  const isHighlighted = loc.id === 5; // Hyderabad ID is 5
+  const dotColor = isHighlighted ? HIGHLIGHT_COLOR : PIN_COLOR;
+  const mainTextColor = isHighlighted ? "#000" : "#1a237e"; // Darker black for highlight
+  const textWeight = isHighlighted ? "800" : "700"; // Extra bold for highlight
+  const nameSize = isHighlighted ? "15" : "14"; // Slightly bigger text
+
   return (
     <g
       onClick={() => onClick(loc.id)}
       style={{ opacity: visible ? 1 : 0, cursor: "pointer" }}
     >
-      {/* 🔴 Blink dot */}
-   <circle cx={loc.x} cy={loc.y} r="6" fill="#620000">
-
+      {/* 🔴 Blink dot - Color changes if highlighted */}
+      <circle cx={loc.x} cy={loc.y} r="6" fill={dotColor}>
         <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite" />
       </circle>
 
-      {/* Glow */}
-      <circle cx={loc.x} cy={loc.y} r="10" fill="none" stroke="#620000">
+      {/* Glow - Color changes if highlighted */}
+      <circle cx={loc.x} cy={loc.y} r="10" fill="none" stroke={dotColor}>
         <animate attributeName="r" values="10;22" dur="1.5s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.7;0" dur="1.5s" repeatCount="indefinite" />
       </circle>
 
-      {/* ✅ TEXT (NAME + CITY) */}
+      {/* ✅ Step 2: TEXT (NAME + CITY) - Highlighted with size, weight, color */}
       <text
         x={labelX}
         y={labelY}
         textAnchor={textAnchor}
-        fontSize="14"
-        fontWeight="700"
-        fill="#1a237e"
+        fontSize={nameSize} // ✅ Size logic
+        fontWeight={textWeight} // ✅ Weight logic
+        fill={mainTextColor} // ✅ Color logic
       >
         <tspan x={labelX}>{loc.name}</tspan>
-        <tspan x={labelX} dy="16" fontSize="12" fill="#444">
+        <tspan
+          x={labelX}
+          dy="16"
+          fontSize={isHighlighted ? "13" : "12"} // ✅ City text also slightly bigger for highlight
+          fill={isHighlighted ? "#222" : "#444"} // ✅ Darker gray for city
+        >
           {loc.city}
         </tspan>
       </text>
@@ -69,95 +82,60 @@ function Pin({ loc, index, active, onClick }) {
   );
 }
 
-export default function MapPointerPolished() {
+export default function MapPointerPolishedHighlight() {
   const [active, setActive] = useState(null);
 
   return (
-    <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-      
-
-
+    <div style={{ maxWidth: "900px", margin: "0 auto", padding: "20px" }}>
       {/* MAP */}
-    <svg
-  viewBox="0 0 1000 1000"
-  style={{
-    width: "100%",
-    display: "block",
-    margin: "0 auto"   // ✅ CENTER FIX
-  }}
->
+      <svg
+        viewBox="0 0 1000 1000"
+        style={{
+          width: "100%",
+          display: "block",
+          margin: "0 auto", // ✅ CENTER FIX
+        }}
+      >
+        {/* 🔲 OUTER BORDER BOX */}
+        <rect
+          x="20"
+          y="20"
+          width="960"
+          height="960"
+          fill="#f9fafb" // Light background for contrast
+          stroke="#ccc" // Light border
+          strokeWidth="1"
+          rx="10" // Rounded corners for box
+        />
 
+        {/* 🏷️ HEADING */}
+        <text
+          x="500"
+          y="70"
+          textAnchor="middle"
+          fontSize="28"
+          fontWeight="700"
+          fill="#0f172b"
+          letterSpacing="1"
+        >
+          HC PAREKH & ASSOCIATES
+        </text>
 
-        {/* ✅ PERFECT BACKGROUND */}
-  <svg
-  viewBox="0 0 1000 1000"
-  style={{
-    width: "100%",
-    display: "block",
-    margin: "0 auto"
-  }}
->
+        {/* 🌐 SUBTEXT (optional - like website) */}
+        <text x="500" y="100" textAnchor="middle" fontSize="14" fill="#666">
+          www.hcparekh.com
+        </text>
 
-
-  {/* 🔲 OUTER BORDER BOX */}
-  <rect
-    x="20"
-    y="20"
-    width="960"
-    height="960"
-    fill="none"
-    stroke="#000"
-    strokeWidth="2"
-  />
-  {/* 🏷️ HEADING */}
-  <text
-    x="500"
-    y="70"
-    textAnchor="middle"
-    fontSize="28"
-    fontWeight="700"
-    fill="#070c1"
-    // color="#0f172b"
-    letterSpacing="1"
-  >
-    HC PAREKH & ASSOCIATES
-  </text>
-
-  {/* 🌐 SUBTEXT (optional - like website) */}
-  <text
-    x="500"
-    y="100"
-    textAnchor="middle"
-    fontSize="14"
-    fill="#0f172b"
-  >
-    www.hcparekh.com
-  </text>
-
-
-  {/* 🗺️ IMAGE (center me) */}
-  <image
-    href="https://img.freepik.com/premium-vector/vector-map-black-outline-india-vector-illustration_686498-514.jpg?w=1060"
-    x="40"
-    y="40"
-    width="920"
-    height="920"
-    preserveAspectRatio="xMidYMid meet"  // ✅ correct centering
-    opacity="0.4"
-  />
-
-  {/* Pins */}
-  {locations.map((loc, i) => (
-    <Pin
-      key={loc.id}
-      loc={loc}
-      index={i}
-      active={active === loc.id}
-      onClick={setActive}
-    />
-  ))}
-
-</svg>
+        {/* 🗺️ IMAGE (center me) */}
+        <image
+          href="https://img.freepik.com/premium-vector/vector-map-black-outline-india-vector-illustration_686498-514.jpg?w=1060"
+          x="40"
+          y="40"
+          width="920"
+          height="920"
+          preserveAspectRatio="xMidYMid meet" // ✅ correct centering
+          opacity="0.3" // Faded map for pin visibility
+        />
 
         {/* Pins */}
         {locations.map((loc, i) => (
