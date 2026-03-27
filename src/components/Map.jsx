@@ -10,7 +10,7 @@ const locations = [
   { id: 7, name: "Parekh Southern Polyfabrics", city: "Chennai", short: "Southern", x: 475, y: 755 },
 ];
 
-const PIN_COLOR = "#8b1a1a";
+const PIN_COLOR = "#620000";
 
 function Pin({ loc, index, active, onClick }) {
   const [visible, setVisible] = useState(false);
@@ -40,13 +40,13 @@ function Pin({ loc, index, active, onClick }) {
       style={{ opacity: visible ? 1 : 0, cursor: "pointer" }}
     >
       {/* 🔴 Blink dot */}
-   <circle cx={loc.x} cy={loc.y} r="6" fill="#d32f2f">
+   <circle cx={loc.x} cy={loc.y} r="6" fill="#620000">
 
         <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite" />
       </circle>
 
       {/* Glow */}
-      <circle cx={loc.x} cy={loc.y} r="10" fill="none" stroke="#d32f2f">
+      <circle cx={loc.x} cy={loc.y} r="10" fill="none" stroke="#620000">
         <animate attributeName="r" values="10;22" dur="1.5s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.7;0" dur="1.5s" repeatCount="indefinite" />
       </circle>
